@@ -1,0 +1,10 @@
+{
+  "name": "go-review",
+  "version": "1.0.0",
+  "description": "Comprehensive Go security code review with specialized bug-finding agents covering goroutine/channel concurrency, data races, nil-interface pitfalls, error handling, the unsafe/cgo boundary, context lifecycle, and web input handling",
+  "author": {
+    "name": "Trail of Bits",
+    "email": "opensource@trailofbits.com"
+  },
+  "keywords": ["go", "golang", "security", "code-review", "static-analysis", "concurrency", "goroutines", "unsafe", "cgo"]
+}

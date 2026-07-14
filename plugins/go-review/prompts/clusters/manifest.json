@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "clusters": [
+    {
+      "cluster_id": "error-handling",
+      "prompt": "prompts/clusters/error-handling.md",
+      "consolidated": false,
+      "gate": "always",
+      "passes": [
+        { "bug_class": "error-ignored",          "prefix": "ERRIGN",       "prompt": "prompts/general/error-ignored-finder.md" },
+        { "bug_class": "error-sentinel-compare",  "prefix": "ERRSENTINEL", "prompt": "prompts/general/error-sentinel-compare-finder.md" },
+        { "bug_class": "error-wrap-lost-type",    "prefix": "ERRWRAP",     "prompt": "prompts/general/error-wrap-lost-type-finder.md" },
+        { "bug_class": "panic-recover-misuse",    "prefix": "PANICRECOVER","prompt": "prompts/general/panic-recover-misuse-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "concurrency-goroutines",
+      "prompt": "prompts/clusters/concurrency-goroutines.md",
+      "consolidated": true,
+      "gate": "has_concurrency",
+      "passes": [
+        { "bug_class": "goroutine-leak",          "prefix": "GOROUTINELEAK" },
+        { "bug_class": "channel-deadlock",         "prefix": "CHANDEADLOCK" },
+        { "bug_class": "waitgroup-race",           "prefix": "WGRACE" },
+        { "bug_class": "channel-close-misuse",     "prefix": "CHANCLOSE" },
+        { "bug_class": "channel-unbounded-block",  "prefix": "CHANBLOCK" }
+      ]
+    },
+    {
+      "cluster_id": "concurrency-data-race",
+      "prompt": "prompts/clusters/concurrency-data-race.md",
+      "consolidated": false,
+      "gate": "has_concurrency",
+      "passes": [
+        { "bug_class": "mutex-copy",               "prefix": "LOCKCOPY",      "prompt": "prompts/general/mutex-copy-finder.md" },
+        { "bug_class": "inconsistent-lock-field",  "prefix": "RACEFIELD",     "prompt": "prompts/general/inconsistent-lock-field-finder.md" },
+        { "bug_class": "lazy-init-race",           "prefix": "LAZYINITRACE",  "prompt": "prompts/general/lazy-init-race-finder.md" },
+        { "bug_class": "map-concurrent-access",    "prefix": "MAPRACE",       "prompt": "prompts/general/map-concurrent-access-finder.md" },
+        { "bug_class": "atomic-nonatomic-mix",     "prefix": "ATOMICMIX",     "prompt": "prompts/general/atomic-nonatomic-mix-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "nil-interface-pitfalls",
+      "prompt": "prompts/clusters/nil-interface-pitfalls.md",
+      "consolidated": false,
+      "gate": "always",
+      "passes": [
+        { "bug_class": "typed-nil-interface", "prefix": "NILINTERFACE", "prompt": "prompts/general/typed-nil-interface-finder.md" },
+        { "bug_class": "nil-map-write",       "prefix": "NILMAPWRITE",  "prompt": "prompts/general/nil-map-write-finder.md" },
+        { "bug_class": "nil-pointer-deref",   "prefix": "NILDEREF",     "prompt": "prompts/general/nil-pointer-deref-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "defer-closure-hazards",
+      "prompt": "prompts/clusters/defer-closure-hazards.md",
+      "consolidated": false,
+      "gate": "always",
+      "passes": [
+        { "bug_class": "loop-var-capture",       "prefix": "LOOPCAPTURE", "prompt": "prompts/general/loop-var-capture-finder.md" },
+        { "bug_class": "defer-in-loop",          "prefix": "DEFERLOOP",   "prompt": "prompts/general/defer-in-loop-finder.md" },
+        { "bug_class": "defer-order-hazard",     "prefix": "DEFERORDER",  "prompt": "prompts/general/defer-order-hazard-finder.md" },
+        { "bug_class": "defer-error-discarded",  "prefix": "DEFERERR",   "prompt": "prompts/general/defer-error-discarded-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "static-hygiene",
+      "prompt": "prompts/clusters/static-hygiene.md",
+      "consolidated": false,
+      "gate": "always",
+      "passes": [
+        { "bug_class": "gomod-version-stale", "prefix": "GOMODVER",   "prompt": "prompts/general/gomod-version-stale-finder.md" },
+        { "bug_class": "lint-config-missing", "prefix": "LINTCONFIG", "prompt": "prompts/general/lint-config-missing-finder.md" },
+        { "bug_class": "deprecated-api",      "prefix": "DEPRECAPI",  "prompt": "prompts/general/deprecated-api-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "unsafe-boundary",
+      "prompt": "prompts/clusters/unsafe-boundary.md",
+      "consolidated": true,
+      "gate": "has_unsafe",
+      "passes": [
+        { "bug_class": "unsafe-pointer-conversion", "prefix": "UNSAFECONV" },
+        { "bug_class": "unsafe-len-cap",            "prefix": "UNSAFELEN" },
+        { "bug_class": "unsafe-layout-assumption",  "prefix": "UNSAFELAYOUT" },
+        { "bug_class": "uintptr-retained",          "prefix": "UINTPTRUNSAFE" }
+      ]
+    },
+    {
+      "cluster_id": "context-lifecycle",
+      "prompt": "prompts/clusters/context-lifecycle.md",
+      "consolidated": false,
+      "gate": "has_context",
+      "passes": [
+        { "bug_class": "context-cancel-leak",       "prefix": "CTXLEAK",    "prompt": "prompts/general/context-cancel-leak-finder.md" },
+        { "bug_class": "context-key-collision",     "prefix": "CTXKEYTYPE","prompt": "prompts/general/context-key-collision-finder.md" },
+        { "bug_class": "context-stored-in-struct",  "prefix": "CTXSTORED", "prompt": "prompts/general/context-stored-in-struct-finder.md" },
+        { "bug_class": "context-done-ignored",      "prefix": "CTXIGNORED","prompt": "prompts/general/context-done-ignored-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "web-input-handling",
+      "prompt": "prompts/clusters/web-input-handling.md",
+      "consolidated": false,
+      "gate": "has_net_http",
+      "passes": [
+        { "bug_class": "ssrf",                       "prefix": "SSRF",          "prompt": "prompts/general/ssrf-finder.md" },
+        { "bug_class": "path-traversal",             "prefix": "PATHTRAVERSAL", "prompt": "prompts/general/path-traversal-finder.md" },
+        { "bug_class": "open-redirect",              "prefix": "OPENREDIRECT",  "prompt": "prompts/general/open-redirect-finder.md" },
+        { "bug_class": "template-autoescape-bypass", "prefix": "TEMPLATEXSS",   "prompt": "prompts/general/template-autoescape-bypass-finder.md" },
+        { "bug_class": "http-no-timeout",            "prefix": "HTTPNOTIMEOUT", "prompt": "prompts/general/http-no-timeout-finder.md" }
+      ]
+    },
+    {
+      "cluster_id": "deserialization-safety",
+      "prompt": "prompts/clusters/deserialization-safety.md",
+      "consolidated": false,
+      "gate": "has_serialization",
+      "passes": [
+        { "bug_class": "json-mass-assignment",           "prefix": "JSONMASSASSIGN", "prompt": "prompts/general/json-mass-assignment-finder.md" },
+        { "bug_class": "xml-entity-expansion",           "prefix": "XMLENTITY",      "prompt": "prompts/general/xml-entity-expansion-finder.md" },
+        { "bug_class": "gob-arbitrary-type",             "prefix": "GOBTYPE",        "prompt": "prompts/general/gob-arbitrary-type-finder.md" },
+        { "bug_class": "recursive-decode-stack-overflow","prefix": "RECURSEDECODE",  "prompt": "prompts/general/recursive-decode-stack-overflow-finder.md" }
+      ]
+    }
+  ]
+}

@@ -261,6 +261,16 @@
       "source": "./plugins/rust-review"
     },
     {
+      "name": "go-review",
+      "version": "1.0.0",
+      "description": "Comprehensive Go security code review with specialized bug-finding agents covering goroutine/channel concurrency, data races beyond go vet, nil-interface and defer/closure pitfalls, the unsafe boundary, context.Context lifecycle, and web-input handling",
+      "author": {
+        "name": "Trail of Bits",
+        "email": "opensource@trailofbits.com"
+      },
+      "source": "./plugins/go-review"
+    },
+    {
       "name": "modern-python",
       "version": "1.5.2",
       "description": "Modern Python best practices. Use when creating new Python projects, and writing Python scripts, or migrating existing projects from legacy tools.",
